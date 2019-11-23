@@ -22,6 +22,17 @@ export default {
     EmployeeForm
   },
   methods: {
+    async getEmployees() {
+      try {
+        const response = await fetch(
+          'https://jsonplaceholder.typicode.com/users'
+        );
+        const data = await response.json();
+        this.employees = data;
+      } catch (error) {
+        return error;
+      }
+    },
     addEmployee(employee) {
       const lastId =
         this.employees.length > 0
@@ -42,26 +53,59 @@ export default {
       );
     }
   },
+
   data() {
     return {
-      employees: [
-        {
-          id: 1,
-          name: 'Richard Hendricks',
-          email: 'richard@piedpiper.com'
-        },
-        {
-          id: 2,
-          name: 'Bertram Gilfoyle',
-          email: 'gilfoyle@piedpiper.com'
-        },
-        {
-          id: 3,
-          name: 'Dinesh Chugtai',
-          email: 'dinesh@piedpiper.com'
-        }
-      ]
+      employees: []
     };
+  },
+  mounted() {
+    this.getEmployees();
+  },
+
+  async addEmployee(employee) {
+    try {
+      const response = await fetch(
+        'https://jsonplaceholder.typicode.com/users',
+        {
+          method: 'POST',
+          body: JSON.stringify(employee),
+          headers: { 'Content-type': 'application/json; charset=UTF-8' }
+        }
+      );
+      const data = await response.json();
+      this.employees = [...this.employees, data];
+    } catch (error) {
+      return error;
+    }
+  },
+  async editEmployee(id, updatedEmployee) {
+    try {
+      const response = await fetch(
+        `https://jsonplaceholder.typicode.com/users/${id}`,
+        {
+          method: 'PUT',
+          body: JSON.stringify(updatedEmployee),
+          headers: { 'Content-type': 'application/json; charset=UTF-8' }
+        }
+      );
+      const data = await response.json();
+      this.employees = this.employees.map(employee =>
+        employee.id === id ? data : employee
+      );
+    } catch (error) {
+      return error;
+    }
+  },
+  async deleteEmployee(id) {
+    try {
+      await fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
+        method: 'DELETE'
+      });
+      this.employees = this.employees.filter(employee => employee.id !== id);
+    } catch (error) {
+      return error;
+    }
   }
 };
 </script>
