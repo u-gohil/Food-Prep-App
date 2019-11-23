@@ -61,6 +61,7 @@ export default {
       }
 
       this.$emit('add:employee', this.employee);
+      this.$refs.first.focus();
       this.employee = {
         name: '',
         email: ''
