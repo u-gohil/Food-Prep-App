@@ -1,6 +1,7 @@
 <template>
   <div id="app" class="small-container">
     <h1>Employees</h1>
+    <employee-form @add:employee="addEmployee" />
 
     <employee-table :employees="employees" />
   </div>
@@ -8,11 +9,18 @@
 
 <script>
 import EmployeeTable from '@/components/EmployeeTable.vue';
+import EmployeeForm from '@/components/EmployeeForm.vue';
 
 export default {
   name: 'app',
   components: {
-    EmployeeTable
+    EmployeeTable,
+    EmployeeForm
+  },
+  methods: {
+    addEmployee(employee) {
+      this.employees = [...this.employees, employee];
+    }
   },
   data() {
     return {
