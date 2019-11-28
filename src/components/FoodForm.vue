@@ -1,7 +1,7 @@
 <template>
   <div id="employee-form">
     <form @submit.prevent="handleSubmit">
-      <label>Employee name</label>
+      <label>Date</label>
       <input
         ref="first"
         type="text"
@@ -10,7 +10,7 @@
         @focus="clearStatus"
         @keypress="clearStatus"
       />
-      <label>Employee Email</label>
+      <label>Ingredients/Meal</label>
       <input
         type="text"
         :class="{ 'has-error': submitting && invalidEmail }"

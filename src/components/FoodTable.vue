@@ -1,13 +1,13 @@
 <template>
   <div id="employee-table">
     <p v-if="employees.length < 1" class="empty-table">
-      No employees
+      No Meals
     </p>
     <table v-else>
       <thead>
         <tr>
-          <th>Employee name</th>
-          <th>Employee email</th>
+          <th>Date</th>
+          <th>Ingredients/Meal</th>
           <th>Actions</th>
         </tr>
       </thead>

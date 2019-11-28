@@ -1,9 +1,9 @@
 <template>
   <div id="app" class="small-container">
-    <h1>Employees</h1>
-    <employee-form @add:employee="addEmployee" />
+    <h1>Meal Prep</h1>
+    <food-form @add:employee="addEmployee" />
 
-    <employee-table
+    <food-table
       :employees="employees"
       @delete:employee="deleteEmployee"
       @edit:employee="editEmployee"
@@ -12,14 +12,14 @@
 </template>
 
 <script>
-import EmployeeTable from '@/components/EmployeeTable.vue';
-import EmployeeForm from '@/components/EmployeeForm.vue';
+import FoodTable from '@/components/FoodTable.vue';
+import FoodForm from '@/components/FoodForm.vue';
 
 export default {
   name: 'app',
   components: {
-    EmployeeTable,
-    EmployeeForm
+    FoodTable,
+    FoodForm
   },
   methods: {
     async getEmployees() {
