@@ -12,22 +12,22 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="employee in employees" :key="employee.id">
-          <td v-if="editing === employee.id">
-            <input type="text" v-model="employee.name" />
+        <tr v-for="employee in employees" :key="employee.date">
+          <td v-if="editing === employee.date">
+            <input type="text" v-model="employee.date" />
           </td>
-          <td v-else>{{ employee.name }}</td>
-          <td v-if="editing === employee.id">
-            <input type="text" v-model="employee.email" />
+          <td v-else>{{ employee.date }}</td>
+          <td v-if="editing === employee.date">
+            <input type="text" v-model="employee.meal" />
           </td>
-          <td v-else>{{ employee.email }}</td>
-          <td v-if="editing === employee.id">
+          <td v-else>{{ employee.meal }}</td>
+          <td v-if="editing === employee.date">
             <button @click="editEmployee(employee)">Save</button>
             <button class="muted-button" @click="editing = null">Cancel</button>
           </td>
           <td v-else>
-            <button @click="editMode(employee.id)">Edit</button>
-            <button @click="$emit('delete:employee', employee.id)">
+            <button @click="editMode(employee.date)">Edit</button>
+            <button @click="$emit('delete:employee', employee.date)">
               Delete
             </button>
           </td>

@@ -25,7 +25,7 @@ export default {
     async getEmployees() {
       try {
         const response = await fetch(
-          'https://jsonplaceholder.typicode.com/users'
+          'http://my-json-server.typicode.com/756D6D61/MealApp-Data/data'
         );
         const data = await response.json();
         this.employees = data;
@@ -36,7 +36,7 @@ export default {
     async addEmployee(employee) {
       try {
         const response = await fetch(
-          'https://jsonplaceholder.typicode.com/users',
+          'http://my-json-server.typicode.com/756D6D61/MealApp-Data/data',
           {
             method: 'POST',
             body: JSON.stringify(employee),
@@ -49,15 +49,17 @@ export default {
         return error;
       }
     },
-    deleteEmployee(id) {
+    deleteEmployee(date) {
       this.employees = this.employees.filter(
-        (this.employees = this.employees.filter(employee => employee.id !== id))
+        (this.employees = this.employees.filter(
+          employee => employee.date !== date
+        ))
       );
     },
-    async editEmployee(id, updatedEmployee) {
+    async editEmployee(date, updatedEmployee) {
       try {
         const response = await fetch(
-          `https://jsonplaceholder.typicode.com/users/${id}`,
+          `http://my-json-server.typicode.com/756D6D61/MealApp-Data/data/${date}`,
           {
             method: 'PUT',
             body: JSON.stringify(updatedEmployee),
@@ -66,7 +68,7 @@ export default {
         );
         const data = await response.json();
         this.employees = this.employees.map(employee =>
-          employee.id === id ? data : employee
+          employee.date === date ? data : employee
         );
       } catch (error) {
         return error;
@@ -83,12 +85,17 @@ export default {
     this.getEmployees();
   },
 
-  async deleteEmployee(id) {
+  async deleteEmployee(date) {
     try {
-      await fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
-        method: 'DELETE'
-      });
-      this.employees = this.employees.filter(employee => employee.id !== id);
+      await fetch(
+        `http://my-json-server.typicode.com/756D6D61/MealApp-Data/data/${date}`,
+        {
+          method: 'DELETE'
+        }
+      );
+      this.employees = this.employees.filter(
+        employee => employee.date !== date
+      );
     } catch (error) {
       return error;
     }

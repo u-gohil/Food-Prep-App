@@ -6,7 +6,7 @@
         ref="first"
         type="text"
         :class="{ 'has-error': submitting && invalidName }"
-        v-model="employee.name"
+        v-model="employee.date"
         @focus="clearStatus"
         @keypress="clearStatus"
       />
@@ -14,7 +14,7 @@
       <input
         type="text"
         :class="{ 'has-error': submitting && invalidEmail }"
-        v-model="employee.email"
+        v-model="employee.meal"
         @focus="clearStatus"
       />
       <p v-if="error && submitting" class="error-message">
@@ -37,25 +37,25 @@ export default {
       error: false,
       success: false,
       employee: {
-        name: '',
-        email: ''
+        date: '',
+        meal: ''
       }
     };
   },
   computed: {
-    invalidName() {
-      return this.employee.name === '';
+    invalidDate() {
+      return this.employee.date === '';
     }
   },
-  invalidEmail() {
-    return this.employee.email === '';
+  invalidMeal() {
+    return this.employee.meal === '';
   },
   methods: {
     handleSubmit() {
       this.submitting = true;
       this.clearStatus();
 
-      if (this.invalidName || this.invalidEmail) {
+      if (this.invalidDate || this.invalidMeal) {
         this.error = true;
         return;
       }
@@ -63,8 +63,8 @@ export default {
       this.$emit('add:employee', this.employee);
       this.$refs.first.focus();
       this.employee = {
-        name: '',
-        email: ''
+        date: '',
+        meal: ''
       };
       this.error = false;
       this.success = true;
