@@ -18,12 +18,12 @@
         @focus="clearStatus"
       />
       <p v-if="error && submitting" class="error-message">
-        ❗Please fill out all required fields
+        ❗Please fill out all fields
       </p>
       <p v-if="success" class="success-message">
-        ✅ Employee successfully added
+        ✅ Meal successfully added
       </p>
-      <button>Add Employee</button>
+      <button>Add Meal</button>
     </form>
   </div>
 </template>
