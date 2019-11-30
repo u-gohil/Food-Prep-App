@@ -1,12 +1,12 @@
 <template>
   <div id="app" class="small-container">
     <h1>Meal Prep</h1>
-    <food-form @add:employee="addEmployee" />
+    <food-form @add:food="addFood" />
 
     <food-table
-      :employees="employees"
-      @delete:employee="deleteEmployee"
-      @edit:employee="editEmployee"
+      :foods="foods"
+      @delete:food="deleteFood"
+      @edit:food="editFood"
     />
   </div>
 </template>
@@ -28,48 +28,44 @@ export default {
           'http://my-json-server.typicode.com/756D6D61/MealApp-Data/data'
         );
         const data = await response.json();
-        this.employees = data;
+        this.foods = data;
       } catch (error) {
         return error;
       }
     },
-    async addEmployee(employee) {
+    async addFood(food) {
       try {
         const response = await fetch(
           'http://my-json-server.typicode.com/756D6D61/MealApp-Data/data',
           {
             method: 'POST',
-            body: JSON.stringify(employee),
+            body: JSON.stringify(food),
             headers: { 'Content-type': 'application/json; charset=UTF-8' }
           }
         );
         const data = await response.json();
-        this.employees = [...this.employees, data];
+        this.foods = [...this.foods, data];
       } catch (error) {
         return error;
       }
     },
-    deleteEmployee(date) {
-      this.employees = this.employees.filter(
-        (this.employees = this.employees.filter(
-          employee => employee.date !== date
-        ))
+    deleteFood(date) {
+      this.foods = this.foods.filter(
+        (this.foods = this.foods.filter(food => food.date !== date))
       );
     },
-    async editEmployee(date, updatedEmployee) {
+    async editFood(date, updatedfood) {
       try {
         const response = await fetch(
           `http://my-json-server.typicode.com/756D6D61/MealApp-Data/data/${date}`,
           {
             method: 'PUT',
-            body: JSON.stringify(updatedEmployee),
+            body: JSON.stringify(updatedfood),
             headers: { 'Content-type': 'application/json; charset=UTF-8' }
           }
         );
         const data = await response.json();
-        this.employees = this.employees.map(employee =>
-          employee.date === date ? data : employee
-        );
+        this.foods = this.foods.map(food => (food.date === date ? data : food));
       } catch (error) {
         return error;
       }
@@ -78,14 +74,14 @@ export default {
 
   data() {
     return {
-      employees: []
+      foods: []
     };
   },
   mounted() {
     this.getFood();
   },
 
-  async deleteEmployee(date) {
+  async deletefood(date) {
     try {
       await fetch(
         `http://my-json-server.typicode.com/756D6D61/MealApp-Data/data/${date}`,
@@ -93,9 +89,7 @@ export default {
           method: 'DELETE'
         }
       );
-      this.employees = this.employees.filter(
-        employee => employee.date !== date
-      );
+      this.foods = this.foods.filter(food => food.date !== date);
     } catch (error) {
       return error;
     }

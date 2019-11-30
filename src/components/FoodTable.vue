@@ -1,6 +1,6 @@
 <template>
-  <div id="employee-table">
-    <p v-if="employees.length < 1" class="empty-table">
+  <div id="food-table">
+    <p v-if="foods.length < 1" class="empty-table">
       No Meals
     </p>
     <table v-else>
@@ -12,22 +12,22 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="employee in employees" :key="employee.date">
-          <td v-if="editing === employee.date">
-            <input type="text" v-model="employee.date" />
+        <tr v-for="food in foods" :key="food.date">
+          <td v-if="editing === food.date">
+            <input type="text" v-model="food.date" />
           </td>
-          <td v-else>{{ employee.date }}</td>
-          <td v-if="editing === employee.date">
-            <input type="text" v-model="employee.meal" />
+          <td v-else>{{ food.date }}</td>
+          <td v-if="editing === food.date">
+            <input type="text" v-model="food.meal" />
           </td>
-          <td v-else>{{ employee.meal }}</td>
-          <td v-if="editing === employee.date">
-            <button @click="editEmployee(employee)">Save</button>
+          <td v-else>{{ food.meal }}</td>
+          <td v-if="editing === food.date">
+            <button @click="editfood(food)">Save</button>
             <button class="muted-button" @click="editing = null">Cancel</button>
           </td>
           <td v-else>
-            <button @click="editMode(employee.date)">Edit</button>
-            <button @click="$emit('delete:employee', employee.date)">
+            <button @click="editMode(food.date)">Edit</button>
+            <button @click="$emit('delete:food', food.date)">
               Delete
             </button>
           </td>
@@ -39,9 +39,9 @@
 
 <script>
 export default {
-  name: 'employee-table',
+  name: 'food-table',
   props: {
-    employees: Array
+    foods: Array
   },
   data() {
     return {
@@ -53,13 +53,13 @@ export default {
       this.editing = id;
     },
 
-    cancelEdit(employee) {
-      Object.assign(employee, this.cachedEmployee);
+    cancelEdit(food) {
+      Object.assign(food, this.cachedfood);
       this.editing = null;
     },
-    editEmployee(employee) {
-      if (employee.name === '' || employee.email === '') return;
-      this.$emit('edit:employee', employee.id, employee);
+    editfood(food) {
+      if (food.name === '' || food.email === '') return;
+      this.$emit('edit:food', food.id, food);
       this.editing = null;
     }
   }
