@@ -22,7 +22,7 @@ export default {
     FoodForm
   },
   methods: {
-    async getEmployees() {
+    async getFood() {
       try {
         const response = await fetch(
           'http://my-json-server.typicode.com/756D6D61/MealApp-Data/data'
@@ -82,7 +82,7 @@ export default {
     };
   },
   mounted() {
-    this.getEmployees();
+    this.getFood();
   },
 
   async deleteEmployee(date) {
