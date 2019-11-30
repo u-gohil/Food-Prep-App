@@ -22,6 +22,6 @@ The data is fed into the app through a fake server provided by <a href="https://
 
 ### 💭Future Improvements
 
-- Change date to a date picker,
+- Change date to a date picker
 - Add a new field for ingredients
 - Change meal type to a drop down menu
